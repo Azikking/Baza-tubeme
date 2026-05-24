@@ -135,4 +135,8 @@ def search_history():
         return jsonify([row['query'] for row in rows])
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    # Render.com yoki boshqa hostinglar PORT muhit o'zgaruvchisini beradi.
+    # Agar berilmasa, default 10000 ishlatiladi (Render uchun standart).
+    port = int(os.environ.get('PORT', 10000))
+    # 0.0.0.0 manzili tashqi dunyodan kirish uchun zarur.
+    app.run(host='0.0.0.0', port=port)
