@@ -3,9 +3,13 @@ from flask_cors import CORS
 import sqlite3
 import os
 
-app = Flask(__name__)
-CORS(app) # Frontend boshqa portda bo'lsa CORS kerak bo'ladi
+app = Flask(__name__, static_folder='.', static_url_path='')
+CORS(app)
 DB_PATH = 'database.sqlite'
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
